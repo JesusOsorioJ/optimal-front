@@ -1,6 +1,9 @@
 # Usar una imagen base de Node.js
 FROM node:18 as build
 
+# Definir un argumento de construcción
+ARG VITE_BACKEND_URL
+
 # Establecer el directorio de trabajo
 WORKDIR /usr/src/app
 
@@ -12,6 +15,9 @@ RUN npm install
 
 # Copiar el resto de la aplicación
 COPY . .
+
+# Configurar la variable de entorno para Vite
+RUN echo "VITE_BACKEND_URL=${VITE_BACKEND_URL}" > .env
 
 # Construir la aplicación para producción
 RUN npm run build
