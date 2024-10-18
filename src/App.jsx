@@ -41,7 +41,7 @@ function App() {
 
   return (
     <ThemeContextProvider>
-      <div id={storedTheme} className="bg-[var(--bg-color1)] text-[var(--text-color)] min-h-screen w-full p-5">
+      <div id={storedTheme ?? "dark"} className="bg-[var(--bg-color1)] text-[var(--text-color)] min-h-screen w-full p-5">
         <Header />
         <button  onClick={()=>setItem({})} className='py-2 px-4 bg-[#2b5ac0] text-white rounded mt-6 m-1 hover:scale-110 transition duration-300'>{t("items.createItem")}</button>
         <ItemsTable items={items} setItem={setItem} onDelete={onDelete}/>
