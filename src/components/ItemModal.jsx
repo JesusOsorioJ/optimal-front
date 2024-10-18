@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 
 import { createItem, updateItem } from '../../api/items';
 
-export default function ItemModal({ item, setItem }){
+export default function ItemModal({ item, setItem, setLoading }){
   const { t } = useTranslation();
   const {
     register,
@@ -12,6 +12,7 @@ export default function ItemModal({ item, setItem }){
   } = useForm();
  
   const onSubmit = async (formData) => {
+    setLoading(true);
     try {
       if (item._id) {
         await updateItem({
@@ -29,6 +30,7 @@ export default function ItemModal({ item, setItem }){
     } catch (error) {
       console.error(error);
     }
+    setLoading(false);
   };
 
 
@@ -54,7 +56,7 @@ export default function ItemModal({ item, setItem }){
                 message: t("items.nameRequirements"),
               },
             })}
-            className="border border-gray-300 p-2 rounded"
+            className="border border-gray-300 p-2 rounded bg-[var(--bg-color4)]"
           />
           {errors.name && (
             <span className="text-red-500 text-xs">
@@ -76,7 +78,7 @@ export default function ItemModal({ item, setItem }){
                 message: t("items.descriptionRequirements"),
               },
             })}
-            className="border border-gray-300 p-2 rounded"
+            className="border border-gray-300 p-2 rounded bg-[var(--bg-color4)]"
           />
           {errors.description && (
             <span className="text-red-500 text-xs">
